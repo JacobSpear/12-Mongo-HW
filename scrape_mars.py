@@ -94,12 +94,12 @@ def mars_hemispheres():
         browser.visit(url)
         browser_html = browser.html
         soup=bs(browser_html,'lxml')
-        big_url = soup.find(class_='downloads').find_all('a')[1]['href']
+        big_url = soup.find(class_='downloads').find('a')['href']
         results.append({'title':title,'img_url':big_url})
 
     sleep(4)
     browser.quit()
-    return [results]
+    return results
 
 
 def scrape():
@@ -109,7 +109,7 @@ def scrape():
             "jpl_img_url": scrape_jpl()[0],
             "mars_weather": weather_on_mars()[0],
             "mars_facts": mars_facts()[0],
-            "hemisphere_img_urls": mars_hemispheres()[0]}
+            "hemisphere_img_urls": mars_hemispheres()}
     return data
     
 

@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
 from scrape_mars import scrape
 import pymongo
 
@@ -18,8 +18,11 @@ def write_db():
 
 @app.route("/")
 def home():
-    data = mars_info.find()
+    data = mars_info.find_one()
+    print(data['hemisphere_img_urls'])
     return render_template("index.html",data = data)
+
+
 
 
 
